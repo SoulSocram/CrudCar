@@ -28,6 +28,7 @@
 - [x] **Reorganização de dados no banco**
 - [ ] Validação de campos
 - [ ] Detalhes de usabilidade a serem acrescentados
+- [ ] Paginação de itens
 
 # Tecnologias Usadas
 
