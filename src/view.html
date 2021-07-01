@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CRUD com Bootstrap</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/view.css">
+  <script src="https://kit.fontawesome.com/6643543cc5.js" crossorigin="anonymous"></script>
+</head>
+<body> 
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-fixed-top">
+        <div class="container-fluid justify-content-center">
+            <a class="navbar-brand" href="index.html">CrudCar</a>
+        </div>
+    </nav>
+    <div id="main" class="container-fluid">
+        <h3 id="text01" class="page-header">Vizualizar informações</h3>
+
+       <hr/>
+       <div id="info" class="row">
+        <div class="col-md-4">
+          <p><strong>Modelo do veículo:</strong></p>
+          <p id="modeloView">{Valor do Campo}</p>
+        </div>
+        <div class="col-md-4">
+          <p><strong>Marca:</strong></p>
+          <p id="marcaView">{Valor do Campo}</p>
+        </div>
+        <div class="col-md-4">
+          <p><strong>Ano de fabricação:</strong></p>
+          <p id="anoFabriView">{Valor do Campo}</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <p><strong>Placa:</strong></p>
+          <p id="placaView">{Valor do Campo}</p>
+        </div>
+        <div class="col-md-4">
+          <p><strong>Cor:</strong></p>
+          <p id="corView">{Valor do Campo}</p>
+        </div>
+        <div class="col-md-4">
+          <p><strong>Chassi:</strong></p>
+          <p id="chassiView">{Valor do Campo}</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <p><strong>Data de compra:</strong></p>
+          <p id="dataCompraView">{Valor do Campo}</p>
+        </div>
+        <div class="col-md-6">
+          <p><strong>Valor da compra:</strong></p>
+          <p id="valorCompraView">{Valor do Campo}</p>
+        </div>
+    </div>
+    <hr />
+    <div id = "dadosVenda">
+     
+    </div>
+    <div id="actions" class="row justify-content-center">
+        <div class="col-md-12">
+          <a href="index.html" class="btn btn-outline-dark">
+            <i class="fas fa-chevron-left"></i>
+            Voltar</a>
+          <a class="btn btn-outline-primary"  href="#" data-bs-toggle="modal" data-bs-target="#putModal" onclick="">
+            <i class="fas fa-pen"></i>
+            Editar</a>
+          <a href="#" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
+            <i class="fas fa-trash-alt"></i>
+            Excluir</a>
+        </div>
+       </div>
+    </div>
+    </div>
+
+    <!--Modal-->
+
+    <!--Modal Delete-->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Deletar</h5>
+          </div>
+          <div class="modal-body">
+            Deseja realmente deletar este carro?
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+              <i class="fas fa-times"></i>
+              Cancelar</button>
+            <button type="button" class="btn btn-outline-danger" onclick="Deletar()">
+              <i class="fas fa-trash-alt"></i>
+              Excluir</button>
+          </div>
+        </div>
+      </div>
+  </div>
+
+    <!--Modal Put-->
+    <div class="modal fade" id="putModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Editar</h5>
+            </div>
+            <div class="modal-body">
+              <form>
+                <hr/>
+            <div class="row">
+              <div class="form-group col-md-4">
+                  <label for="carroModeloPut">Modelo do veículo:</label>
+                  <input type="email" class="form-control" id="carroModeloPut" placeholder="Digite o valor">
+              </div>
+            <div class="form-group col-md-4">
+                  <label for="carroMarcaPut">Marca:</label>
+                  <input type="email" class="form-control" id="carroMarcaPut" placeholder="Digite o valor">
+              </div>
+            <div class="form-group col-md-4">
+                  <label for="dataFabricacaoPut">Ano de fabricação:</label>
+                  <input type="month" class="form-control" id="dataFabricacaoPut" placeholder="Digite o valor">
+              </div>
+          </div>
+          
+          <div class="row">
+              <div class="form-group col-md-4">
+                  <label for="carroPlacaPut">Placa:</label>
+                  <input type="email" class="form-control" id="carroPlacaPut" placeholder="Digite o valor">
+              </div>
+            <div class="form-group col-md-4">
+                  <label for="carroCorPut">Cor:</label>
+                  <input type="email" class="form-control" id="carroCorPut" placeholder="Digite o valor">
+              </div>
+            <div class="form-group col-md-4">
+                  <label for="carroChassiPut">Chassi:</label>
+                  <input type="email" class="form-control" id="carroChassiPut" placeholder="Digite o valor">
+              </div>
+          </div> 
+            <div class="row">
+                <div class="form-group col-md-6">
+                <label for="dataCompraPut">Data da compra:</label>
+                <input type="date" class="form-control" id="dataCompraPut" placeholder="Digite o valor">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="valorCompraPut">Valor da compra:</label>
+              <input type="number" class="form-control" id="valorCompraPut" placeholder="Digite o valor">
+          </div>
+          </div>      
+        <hr/>
+          <div id="vendaModal" class="row">
+              
+          </div> 
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                <i class="fas fa-times"></i>
+                Cancelar</button>
+              <button type="button" class="btn btn-outline-primary" onclick="Update()">
+                <i class="fas fa-check"></i>
+                Salvar</button>
+            </div>
+          </div>
+        </div>
+    </div>
+
+      <script src="js/view.js"></script>
+       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+       integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+       crossorigin="anonymous"></script>
+</body>
+</html>

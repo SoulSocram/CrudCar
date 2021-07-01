@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CRUD com Bootstrap</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/main.css">
+  <script src="https://kit.fontawesome.com/6643543cc5.js" crossorigin="anonymous"></script>
+</head>
+<body> 
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-fixed-top">
+        <div class="container-fluid justify-content-center">
+            <a class="navbar-brand" href="#">CrudCar</a>
+        </div>
+    </nav>
+    <div id="main" class="container-fluid">
+        <hr/>
+        <div id="top" class="row">
+            <div class="col-md-3">
+                <h2>Carros</h2>
+            </div>
+         
+            <div class="col-md-6">
+              <div class="dropdown">
+                <a class="btn btn-outline-secondary" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                  <i class="fas fa-filter"></i>
+                  Filtros
+                </a>
+              
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                  <li><a class="dropdown-item" id="dropTodos" onclick="ListarCarros()" href="#">Todos Carros</a></li>
+                  <li><a class="dropdown-item" id="Disponível" onclick="ListarCarrosFiltro('Disponível')" href="#">Carros disponíveis</a></li>
+                  <li><a class="dropdown-item" id="Vendido" onclick="ListarCarrosFiltro('Vendido')" href="#">Histórico de vendas</a></li>
+                </ul>
+              </div>
+            </div>
+         
+            <div class="col-md-3">
+                <a class="btn btn-outline-primary btn-xs border-0" id="adicionar" href="#" data-bs-toggle="modal" href="#"  data-bs-target="#postCarroModal" onclick="">
+                  <i class="fas fa-plus"></i>
+                  Adicionar</a>
+            </div>
+        </div>
+        <hr />
+        <ul class="nav justify-content-center">
+            <li class="nav-item col-md-3">
+                <p id="compraTotal"></p>
+            </li>
+            <li class="nav-item col-md-3">
+                <p id="vendaTotal"></p>
+            </li>
+            <li class="nav-item col-md-3">
+                <p id="lucroMensal"></p>
+            </li>
+            <li class="nav-item col-md-3">
+                <p id="comissoes"></p>
+            </li>
+          </ul>
+    <div class="table-responsive col-md-12">
+        <table class="table table-striped" cellspacing="0" cellpadding="0">
+            <thead>
+                <tr>
+                    <th>Status</th>
+                    <th>Modelo</th>
+                    <th>Marca</th>
+                    <th>Ano de Fabricação</th>
+                    <th>Cor</th>
+                    <th>Placa</th>
+                    <th class="actions">Ações</th>
+                 </tr>
+            </thead>
+            <tbody id="lista">
+            </tbody>
+         </table>
+     </div>
+        </div>
+        <hr/>
+        </div>
+    </div>
+
+    <!--Modal-->>
+
+    <!--Modal Post Carro-->
+    <div class="modal fade" id="postCarroModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header justify-content-center">
+              <h5 class="modal-title" id="exampleModalLabel">Adicionar</h5>
+            </div>
+            <div class="modal-body">
+              <p id="postErro"></p>
+              <form>
+                <hr/>
+            <div class="row">
+              <div class="form-group col-md-4">
+                  <label for="carroModeloPost">Modelo do veículo:</label>
+                  <input type="email" class="form-control" id="carroModeloPost" placeholder="Digite o valor">
+              </div>
+            <div class="form-group col-md-4">
+                  <label for="carroMarcaPost">Marca:</label>
+                  <input type="email" class="form-control" id="carroMarcaPost" placeholder="Digite o valor">
+              </div>
+            <div class="form-group col-md-4">
+                  <label for="dataFabricacaoPost">Ano de fabricação:</label>
+                  <input type="month" class="form-control" id="dataFabricacaoPost" placeholder="Digite o valor">
+              </div>
+          </div>
+          
+          <div class="row">
+              <div class="form-group col-md-4">
+                  <label for="carroPlacaPost">Placa:</label>
+                  <input type="email" class="form-control" id="carroPlacaPost" placeholder="Digite o valor">
+              </div>
+            <div class="form-group col-md-4">
+                  <label for="carroCorPost">Cor:</label>
+                  <input type="email" class="form-control" id="carroCorPost" placeholder="Digite o valor">
+              </div>
+            <div class="form-group col-md-4">
+                  <label for="carroChassiPost">Chassi:</label>
+                  <input type="email" class="form-control" id="carroChassiPost" placeholder="Digite o valor">
+              </div>
+          </div> 
+            <div class="row">
+                <div class="form-group col-md-6">
+                <label for="dataCompraPost">Data da compra:</label>
+                <input type="date" class="form-control" id="dataCompraPost" placeholder="Digite o valor">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="valorCompraPost">Valor da compra:</label>
+              <input type="number" onkeypress="return event.charCode >= 48" min="1" class="form-control" id="valorCompraPost" placeholder="Digite o valor">
+          </div>
+          </div>      
+        <hr/>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                <i class="fas fa-times"></i>
+                Cancelar</button>
+              <button type="button" class="btn btn-outline-primary" onclick="Inserir()">
+                <i class="fas fa-check"></i>
+                Salvar</button>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <!--Modal Post Venda-->
+
+    <div class="modal fade" id="postVendaModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Adicionar</h5>
+          </div>
+          <div class="modal-body">
+            <form>
+              <hr/>
+          <div class="row">
+            <div class="form-group col-md-4">
+                <label for="dataVendaPost">Data da venda:</label>
+                <input type="date" class="form-control" id="dataVenda" placeholder="Digite o valor">
+            </div>
+          <div class="form-group col-md-4">
+                <label for="valorVendaPost">Valor da venda:</label>
+                <input type="number" class="form-control" id="valorVenda" placeholder="Digite o valor" onchange="CalComissao()">
+            </div>
+          <div class="form-group col-md-4">
+                <label for="comissaoPost">Comissão:</label>
+                <input type="number" class="form-control" id="comissaoVenda" placeholder="Digite o valor" readonly>
+            </div>
+        </div>    
+      <hr/>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+              <i class="fas fa-times"></i>
+              Cancelar</button>
+            <button type="button" class="btn btn-outline-primary" onclick="Vender()">
+              <i class="fas fa-check"></i>
+              Salvar</button>
+          </div>
+        </div>
+      </div>
+  </div>
+
+        <script src="js/index.js"></script>
+       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+       integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+       crossorigin="anonymous"></script>
+</body>
+</html>
