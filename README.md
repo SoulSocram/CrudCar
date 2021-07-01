@@ -51,7 +51,7 @@
 **Preparar o banco de dados**
 
 - Com o XAMPP instalado, inicie os servidores de Apashe e SQL, e clique em "Admin" no serivor SQL.
-- Crie uma tabela com o nome **"crudcar_bd"**, e na aba SQL execute o script do projeto ("CrudCarBD").
+- Crie uma tabela com o nome **"crudcar_bd.sql"**, e na aba SQL execute o script do projeto ("CrudCarBD").
 
 *No script do banco contém alguns dados para testes*
 
